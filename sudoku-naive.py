@@ -16,15 +16,57 @@ class Node(object):
 	def __init__(self, data, id):
 		super(Node, self).__init__()
 		self.data = data
+		self.id = id
 
-	def __str__(self)
+	def __repr__(self):
+		return str([self.data, self.id])
 
 
 
 allnodes = []
 
+id = 0
 for x in inboard.split("\n"):
 	for z in x.split(","):
-		allnodes.append(Node(z, 5))
+		allnodes.append(Node(z, id))
+		id = id + 1;
 
-print(allnodes)
+
+blanknodes = []
+for x in allnodes:
+	if x.data == '_':
+		blanknodes.append(x)
+
+
+
+
+
+
+# private boolean betaPlacer(int x, int y){
+# 	if (maze[x][y] == 'E'){
+# 		return true;
+# 	}
+# 	for (int c = 0; c < 4; c++){
+# 		if (maze[x][y] == ' ' || maze[x][y] == '.'|| maze[x][y] == 'S'){
+# 			maze[x][y] = '@';
+# 			steps++;
+# 			if (animated) debug();
+# 			// debug();
+# 			if (betaPlacer(x+moves[c][0], y+moves[c][1])){
+# 				if (animated) debug();
+# 				return true;
+# 			}
+# 			// debug();
+# 			maze[x][y] = '.';
+# 			steps--;
+# 		}
+# 		else if (maze[x][y] == 'S') {
+# 		}
+# 	}
+# 	return false;
+# }
+
+
+
+
+print(blanknodes)
