@@ -87,7 +87,7 @@ _,_,7,_,_,_,_,_,_
 _,8,_,_,_,4,_,6,_
 _,2,_,_,_,_,_,_,_"""
 
-CURRENT_BOARD = a7
+CURRENT_BOARD = a5
 
 # "7, 6, 2"
 
@@ -120,6 +120,8 @@ cliques = [[0, 1, 2, 3, 4, 5, 6, 7, 8],
            [60, 61, 62, 69, 70, 71, 78, 79, 80]
            ]
 
+allnodes = []
+blanknodes = []
 
 class Node(object):
     """holds a node of the sudoku Node"""
@@ -133,21 +135,24 @@ class Node(object):
         return str([self.data, self.id])
 
 
-allnodes = []
 
-id = 0
-for x in CURRENT_BOARD.split("\n"):
-    for z in x.split(","):
-        allnodes.append(Node(z, id))
-        id = id + 1
+def calcAllNodes():
+    id = 0
+    for x in CURRENT_BOARD.split("\n"):
+        for z in x.split(","):
+            allnodes.append(Node(z, id))
+            id = id + 1
 
 # print(allnodes)
 
-blanknodes = []
-for x in allnodes:
-    if x.data == '_':
-        blanknodes.append(x)
 
+def calcBlankNodes():
+    for x in allnodes:
+        if x.data == '_':
+            blanknodes.append(x)
+
+calcAllNodes()
+calcBlankNodes()
 
 # void findSolutions(n, other params) :
 #     if (found a solution) :
@@ -210,10 +215,11 @@ def isSolved(in_nodes):
 findSolutions(0)
 print("--- %s seconds ---" % (time.time() - start_time))
 
-for x in allnodes:
-    print(x.data, end = "")
-    if (x.id + 1) % 9 == 0:
-        print()
+def printer():
+    for x in allnodes:
+        print(x.data, end = "")
+        if (x.id + 1) % 9 == 0:
+            print()
 
 
-# print(allnodes)
+printer()
