@@ -22,9 +22,9 @@ inboards = """6,9,4,1,8,3,5,2,7
 3,5,8,2,7,1,_,9,4
 1,2,6,4,3,9,8,7,5
 7,4,9,8,5,6,2,1,3
-4,7,2,9,1,_,3,5,6
-8,3,1,5,6,2,7,4,_
-9,6,5,3,4,7,1,8,2"""
+4,7,2,9,1,8,3,5,6
+8,3,1,5,6,2,7,4,9
+9,_,5,3,4,7,1,8,_"""
 
 
 CURRENT_BOARD = inboards
@@ -108,15 +108,23 @@ def findSolutions(nodeindex):
     if (isSolved(allnodes)):
         return True
     else:
-        relevantcliques = []
-        for clique in cliques:
-            if int(nodeindex) in clique:
-                relevantcliques.append(clique)
-        print()
-        print("I AM NODE", nodeindex)
-        print(relevantcliques)
-
         nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+        if nodeindex < len(blanknodes):
+            relevantcliques = []
+            for clique in cliques:
+                if blanknodes[nodeindex].id in clique:
+                    relevantcliques.append(clique)
+            print()
+            print("I AM NODE", blanknodes[nodeindex].id)
+            print(relevantcliques)
+
+            for clique in relevantcliques:
+                for x in clique:
+                    if allnodes[x].data in nums:
+                        nums.remove(allnodes[x].data)
+
+        print(nums)
+
         for x in nums:
             if nodeindex < len(blanknodes):
                 blanknodes[nodeindex].data = x
