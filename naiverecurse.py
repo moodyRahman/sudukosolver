@@ -87,15 +87,7 @@ _,_,7,_,_,_,_,_,_
 _,8,_,_,_,4,_,6,_
 _,2,_,_,_,_,_,_,_"""
 
-CURRENT_BOARD = a5a7 = """_,_,_,2,_,_,_,_,_
-_,_,_,_,9,_,5,_,_
-1,_,6,_,_,_,_,4,_
-_,_,_,_,_,_,_,8,_
-4,_,_,_,_,6,_,_,_
-_,9,_,3,_,_,2,_,_
-_,_,7,_,_,_,_,_,_
-_,8,_,_,_,4,_,6,_
-_,2,_,_,_,_,_,_,_"""
+CURRENT_BOARD = a5
 
 # "7, 6, 2"
 class Node(object):
@@ -227,7 +219,6 @@ class Board(object):
 
 
     # findSolutions(0)
-    # print("--- %s seconds ---" % (time.time() - start_time))
 
     def printer(self):
         for x in self.allnodes:
@@ -236,13 +227,15 @@ class Board(object):
                 print()
 
 
-    def solve(self):
+    def solve(self, print = False):
         self.calcAllNodes()
         self.calcBlankNodes()
         self.findSolutions(0)
-        soard.printer()
+        if (print):
+            soard.printer()
 
 
 
 soard = Board(inboard)
 soard.solve()
+print("--- %s seconds ---" % (time.time() - start_time))
