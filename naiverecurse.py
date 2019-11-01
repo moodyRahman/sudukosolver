@@ -87,7 +87,18 @@ _,_,7,_,_,_,_,_,_
 _,8,_,_,_,4,_,6,_
 _,2,_,_,_,_,_,_,_"""
 
-CURRENT_BOARD = a5
+
+max = """_,3,_,_,7,1,_,_,_
+8,_,2,_,_,9,_,_,6
+_,_,_,_,2,_,4,_,3
+2,_,7,_,_,3,_,8,_
+9,1,_,_,_,_,5,3,_
+_,_,_,4,1,7,_,6,_
+_,4,_,9,_,_,_,7,_
+_,_,_,1,8,_,3,_,_
+_,9,1,7,_,_,_,_,5"""
+
+CURRENT_BOARD = max
 
 # "7, 6, 2"
 class Node(object):
@@ -236,6 +247,6 @@ class Board(object):
 
 
 
-soard = Board(inboard)
-soard.solve()
+soard = Board(max)
+soard.solve(print = True)
 print("--- %s seconds ---" % (time.time() - start_time))
