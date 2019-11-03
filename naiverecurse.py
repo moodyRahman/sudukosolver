@@ -61,7 +61,7 @@ class Board(object):
 
     def calcAllNodes(self):
         id = 0
-        for x in CURRENT_BOARD.split("\n"):
+        for x in self.CURRENT_BOARD.split("\n"):
             for z in x.split(","):
                 self.allnodes.append(Node(z, id))
                 id = id + 1
@@ -134,7 +134,7 @@ class Board(object):
         self.calcBlankNodes()
         self.findSolutions(0)
         if (printt):
-            soard.printer()
+            self.printer()
 
 
 
@@ -149,33 +149,34 @@ allin = f.read()
 
 allin = allin.split("\n\n")
 
-lookingat = ""
-inboard = ""
+
+matchedentry = ""
 
 for entry in allin:
-    print("============================")
-    entry = entry.strip("\n")
-    header = entry.split("\n")[:-9]
-    print(header)
-    print(len(header))
-    if len(header) == 1:
-        if header[0].split(",")[0] == id:
-            lookingat = header[0].split(",")[0]
-            inboard = entry.split("\n")[-8:]
-    else:
-        if header[1].split(",")[0] == id:
-            lookingat = header[1].split(",")[0]
-            print("here")
-            print(type(entry))
-            inboard = entry.split("\n")[-8:]
+    if id in entry:
+        matchedentry = entry
 
-    print("============================\n")
-
-print(lookingat)
-for x in inboard:
-    print(x)
+b = Board(matchedentry[-161:])
+b.solve(printt = True)
 
 
 
-# soard = Board(CURRENT_BOARD)
+
+
+
+
+
+
+tboard = """_,_,4,1,_,_,5,2,7
+2,1,3,7,_,_,_,_,_
+_,_,7,6,2,4,_,_,_
+3,5,_,2,7,_,_,_,_
+_,_,_,_,3,_,8,7,5
+_,4,_,_,_,6,_,1,3
+4,7,2,_,1,_,_,5,_
+_,3,1,_,6,2,_,_,9
+9,_,_,_,_,_,1,8,_"""
+
+
+# soard = Board(tboard)
 # soard.solve(printt = True)
