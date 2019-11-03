@@ -1,128 +1,32 @@
+import sys
 
-import os
-import time
-start_time = time.time()
+filein = sys.argv[1]
+fileout = sys.argv[2]
+id = sys.argv[3]
 
+f = open(filein, "r")
 
-inboard = """_,_,4,1,_,_,5,2,7
-2,1,3,7,_,_,_,_,_
-_,_,7,6,2,4,_,_,_
-3,5,_,2,7,_,_,_,_
-_,_,_,_,3,_,8,7,5
-_,4,_,_,_,6,_,1,3
-4,7,2,_,1,_,_,5,_
-_,3,1,_,6,2,_,_,9
-9,_,_,_,_,_,1,8,_"""
+allin = f.read()
 
+allin = allin.split("\n\n")
 
-inboards = """_,_,4,1,8,3,5,2,7
-2,1,3,7,9,5,4,6,8
-5,8,7,6,2,4,9,3,1
-3,5,8,2,7,1,6,9,4
-1,2,6,4,3,9,8,7,5
-7,4,9,8,5,6,2,1,3
-4,7,2,9,1,8,3,5,6
-8,3,1,5,6,2,7,4,9
-9,6,5,3,4,7,1,8,2"""
+lookingat = ""
 
+for x in allin:
+    print("------------------------------------------")
+    x = x.strip("\n")
+    for z in x.split("\n")[:-9]:
+        z = z.replace("\n", "")
+        print(z.split(","))
+        if id == z.split(",")[0]:
+            print("got here")
+            lookingat = x
+    print("------------------------------------------\n")
 
-test = """_,_,4,1,_,3,5,_,7
-2,1,3,_,9,5,4,6,8
-5,8,_,_,2,4,_,_,1
-3,_,8,2,_,_,6,9,_
-1,2,6,_,3,_,8,_,5
-7,_,9,_,5,6,_,1,3
-4,_,2,9,1,_,3,5,6
-8,3,_,5,_,2,7,_,9
-9,6,_,3,_,7,1,_,2"""
+print("here")
+print(lookingat)
 
 
-medboard = """2,_,_,6,_,_,_,_,_
-6,_,_,_,5,1,_,4,_
-_,7,_,_,_,_,_,_,_
-_,_,_,_,3,_,_,1,4
-_,_,5,_,6,_,_,_,_
-_,1,9,_,4,_,_,5,_
-_,_,6,_,_,_,_,2,5
-_,_,_,9,_,_,_,8,_
-8,9,_,_,_,_,4,_,_"""
-
-hardboard = """_,_,6,_,9,_,_,_,_
-1,7,_,_,_,3,_,9,_
-_,_,_,7,_,_,_,_,5
-_,_,_,5,_,_,6,_,_
-_,9,_,_,3,_,2,_,_
-_,_,4,_,_,2,1,_,_
-_,_,_,9,7,8,_,_,_
-_,4,_,_,_,5,_,8,_
-_,_,_,_,_,6,_,_,_"""
-
-
-a8 = """_,_,_,_,3,_,9,_,4
-_,_,_,_,_,_,_,_,6
-8,_,_,_,_,5,_,_,_
-_,_,_,9,_,_,_,_,_
-7,_,_,_,_,_,_,8,_
-_,_,_,6,_,8,_,_,_
-_,1,6,_,_,_,_,_,_
-4,_,9,_,_,_,_,_,_
-_,_,_,_,7,_,_,3,_"""
-
-a5 = """_,_,_,1,_,_,_,9,3
-1,_,4,_,6,_,_,_,_
-5,3,_,_,7,_,_,_,_
-2,7,_,_,_,6,_,_,_
-_,1,_,_,_,_,_,5,_
-_,_,_,9,_,_,_,4,7
-_,_,_,_,3,_,_,6,2
-_,_,_,_,4,_,8,_,9
-7,6,_,_,_,1,_,_,_"""
-
-a6 = """8,_,_,_,_,_,_,_,_
-_,_,3,6,_,_,_,_,_
-_,7,_,_,9,_,2,_,_
-_,5,_,_,_,7,_,_,_
-_,_,_,_,4,5,7,_,_
-_,_,_,1,_,_,_,3,_
-_,_,1,_,_,_,_,6,8
-_,_,8,5,_,_,_,1,_
-_,9,_,_,_,_,4,_,_"""
-
-
-a7 = """_,_,_,2,_,_,_,_,_
-_,_,_,_,9,_,5,_,_
-1,_,6,_,_,_,_,4,_
-_,_,_,_,_,_,_,8,_
-4,_,_,_,_,6,_,_,_
-_,9,_,3,_,_,2,_,_
-_,_,7,_,_,_,_,_,_
-_,8,_,_,_,4,_,6,_
-_,2,_,_,_,_,_,_,_"""
-
-
-max = """_,3,_,_,7,1,_,_,_
-8,_,2,_,_,9,_,_,6
-_,_,_,_,2,_,4,_,3
-2,_,7,_,_,3,_,8,_
-9,1,_,_,_,_,5,3,_
-_,_,_,4,1,7,_,6,_
-_,4,_,9,_,_,_,7,_
-_,_,_,1,8,_,3,_,_
-_,9,1,7,_,_,_,_,5"""
-
-
-wiki = """1,_,_,2,_,_,3,_,_
-2,_,_,3,_,_,4,_,_
-3,_,_,4,_,_,5,_,_
-4,_,_,5,_,_,6,_,_
-_,_,_,_,_,_,_,_,_
-_,_,3,_,_,4,_,_,5
-_,_,4,_,_,5,_,_,6
-_,_,5,_,_,6,_,_,7
-_,_,6,_,_,7,_,_,8"""
-
-
-CURRENT_BOARD = a5
 
 
 # "7, 6, 2"
@@ -199,21 +103,6 @@ class Board(object):
             if x.data == '_':
                 self.blanknodes.append(x)
 
-    # void findSolutions(n, other params) :
-    #     if (found a solution) :
-    #         solutionsFound = solutionsFound + 1;
-    #         displaySolution();
-    #         if (solutionsFound >= solutionTarget) :
-    #             System.exit(0);
-    #         return
-    #
-    #     for (val = first to last) :
-    #         if (isValid(val, n)) :
-    #             applyValue(val, n);
-    #             findSolutions(n+1, other params);
-    #             removeValue(val, n);
-
-
     def findSolutions(self, nodeindex):
         if (self.isSolved(self.allnodes)):
             return True
@@ -224,16 +113,11 @@ class Board(object):
                 for clique in self.cliques:
                     if self.blanknodes[nodeindex].id in clique:
                         relevantcliques.append(clique)
-                # print()
-                # print("I AM NODE", blanknodes[nodeindex].id)
-                # print(relevantcliques)
 
                 for clique in relevantcliques:
                     for x in clique:
                         if self.allnodes[x].data in nums:
                             nums.remove(self.allnodes[x].data)
-
-            # print(nums)
 
             for x in nums:
                 if nodeindex < len(self.blanknodes):
@@ -262,9 +146,6 @@ class Board(object):
                 return False
         return True
 
-
-    # findSolutions(0)
-
     def printer(self):
         for x in self.allnodes:
             print(x.data, end = "")
@@ -277,16 +158,14 @@ class Board(object):
                 print("############")
         print(self.steps, "iteration")
 
-
     def solve(self, printt = False):
         self.calcAllNodes()
         self.calcBlankNodes()
         self.findSolutions(0)
         if (printt):
             soard.printer()
-            print("--- %s seconds ---" % (time.time() - start_time))
 
 
 
-soard = Board(CURRENT_BOARD, animation = True, delay = .005)
-soard.solve(printt = True)
+# soard = Board(CURRENT_BOARD)
+# soard.solve(printt = True)
