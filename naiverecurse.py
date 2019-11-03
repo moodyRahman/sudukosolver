@@ -1,3 +1,4 @@
+#! /usr/bin/python
 import sys
 
 # "7, 6, 2"
@@ -157,26 +158,19 @@ for entry in allin:
         matchedentry = entry
 
 b = Board(matchedentry[-161:])
-b.solve(printt = True)
+b.solve()
 
+# print("-----------")
+out = ""
+for x in b.allnodes:
+    out = out + str(x.data)
+    out = out + ","
+    if (x.id+1)%9 == 0:
+        out = out.strip(",")
+        out = out + "\n"
 
+out.strip("\n")
 
-
-
-
-
-
-
-tboard = """_,_,4,1,_,_,5,2,7
-2,1,3,7,_,_,_,_,_
-_,_,7,6,2,4,_,_,_
-3,5,_,2,7,_,_,_,_
-_,_,_,_,3,_,8,7,5
-_,4,_,_,_,6,_,1,3
-4,7,2,_,1,_,_,5,_
-_,3,1,_,6,2,_,_,9
-9,_,_,_,_,_,1,8,_"""
-
-
-# soard = Board(tboard)
-# soard.solve(printt = True)
+f = open(fileout, "w")
+f.write(out)
+f.close()
