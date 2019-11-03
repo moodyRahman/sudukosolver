@@ -1,34 +1,5 @@
 import sys
 
-filein = sys.argv[1]
-fileout = sys.argv[2]
-id = sys.argv[3]
-
-f = open(filein, "r")
-
-allin = f.read()
-
-allin = allin.split("\n\n")
-
-lookingat = ""
-
-for x in allin:
-    print("------------------------------------------")
-    x = x.strip("\n")
-    for z in x.split("\n")[:-9]:
-        z = z.replace("\n", "")
-        print(z.split(","))
-        if id == z.split(",")[0]:
-            print("got here")
-            lookingat = x
-    print("------------------------------------------\n")
-
-print("here")
-print(lookingat)
-
-
-
-
 # "7, 6, 2"
 class Node(object):
     """holds a node of the sudoku Node"""
@@ -164,6 +135,45 @@ class Board(object):
         self.findSolutions(0)
         if (printt):
             soard.printer()
+
+
+
+
+filein = sys.argv[1]
+fileout = sys.argv[2]
+id = sys.argv[3]
+
+f = open(filein, "r")
+
+allin = f.read()
+
+allin = allin.split("\n\n")
+
+lookingat = ""
+inboard = ""
+
+for entry in allin:
+    print("============================")
+    entry = entry.strip("\n")
+    header = entry.split("\n")[:-9]
+    print(header)
+    print(len(header))
+    if len(header) == 1:
+        if header[0].split(",")[0] == id:
+            lookingat = header[0].split(",")[0]
+            inboard = entry.split("\n")[-8:]
+    else:
+        if header[1].split(",")[0] == id:
+            lookingat = header[1].split(",")[0]
+            print("here")
+            print(type(entry))
+            inboard = entry.split("\n")[-8:]
+
+    print("============================\n")
+
+print(lookingat)
+for x in inboard:
+    print(x)
 
 
 
