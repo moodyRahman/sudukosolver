@@ -25,6 +25,18 @@ inboards = """_,_,4,1,8,3,5,2,7
 8,3,1,5,6,2,7,4,9
 9,6,5,3,4,7,1,8,2"""
 
+
+test = """_,_,4,1,_,3,5,_,7
+2,1,3,_,9,5,4,6,8
+5,8,_,_,2,4,_,_,1
+3,_,8,2,_,_,6,9,_
+1,2,6,_,3,_,8,_,5
+7,_,9,_,5,6,_,1,3
+4,_,2,9,1,_,3,5,6
+8,3,_,5,_,2,7,_,9
+9,6,_,3,_,7,1,_,2"""
+
+
 medboard = """2,_,_,6,_,_,_,_,_
 6,_,_,_,5,1,_,4,_
 _,7,_,_,_,_,_,_,_
@@ -98,7 +110,8 @@ _,4,_,9,_,_,_,7,_
 _,_,_,1,8,_,3,_,_
 _,9,1,7,_,_,_,_,5"""
 
-CURRENT_BOARD = max
+CURRENT_BOARD = inboard
+
 
 # "7, 6, 2"
 class Node(object):
@@ -115,10 +128,13 @@ class Node(object):
 class Board(object):
     """holds a sudoku Board"""
 
-    def __init__(self, arg):
+    def __init__(self, arg, animation = False, delay = .1):
         super(Board, self).__init__()
         self.CURRENT_BOARD = arg
+        self.animation = animation
+        self.delay = delay
 
+    steps = 0
 
     cliques = [[0, 1, 2, 3, 4, 5, 6, 7, 8],
                [9, 10, 11, 12, 13, 14, 15, 16, 17],
@@ -209,7 +225,13 @@ class Board(object):
 
             for x in nums:
                 if nodeindex < len(self.blanknodes):
+                    if self.animation:
+                        print("\033[2J")
+                        self.printer()
+                        time.sleep(self.delay)
+                        print("\033[2J")
                     self.blanknodes[nodeindex].data = x
+                    self.steps = self.steps + 1
                     if (self.findSolutions(nodeindex + 1)):
                         return True
                     else:
@@ -234,19 +256,25 @@ class Board(object):
     def printer(self):
         for x in self.allnodes:
             print(x.data, end = "")
+
+            if (x.id + 1) % 3 == 0:
+                print("|", end = "")
             if (x.id + 1) % 9 == 0:
-                print()
+                print("")
+            if (x.id + 1) % 27 == 0:
+                print("############")
+        print(self.steps, "iteration")
 
 
-    def solve(self, print = False):
+    def solve(self, printt = False):
         self.calcAllNodes()
         self.calcBlankNodes()
         self.findSolutions(0)
-        if (print):
+        if (printt):
             soard.printer()
+            print("--- %s seconds ---" % (time.time() - start_time))
 
 
 
-soard = Board(max)
-soard.solve(print = True)
-print("--- %s seconds ---" % (time.time() - start_time))
+soard = Board(CURRENT_BOARD, animation = False, delay = .1)
+soard.solve(printt = True)
