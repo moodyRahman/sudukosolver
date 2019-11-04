@@ -118,18 +118,6 @@ class Board(object):
                 return False
         return True
 
-    def printer(self):
-        for x in self.allnodes:
-            print(x.data, end = "")
-
-            if (x.id + 1) % 3 == 0:
-                print("|", end = "")
-            if (x.id + 1) % 9 == 0:
-                print("")
-            if (x.id + 1) % 27 == 0:
-                print("############")
-        print(self.steps, "iteration")
-
     def solve(self, printt = False):
         self.calcAllNodes()
         self.calcBlankNodes()
