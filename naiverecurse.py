@@ -1,6 +1,6 @@
 #! /usr/bin/python
 import sys
-
+import time
 # "7, 6, 2"
 class Node(object):
     """holds a node of the sudoku Node"""
@@ -157,8 +157,8 @@ for entry in allin:
     if id in entry:
         matchedentry = entry
 
-b = Board(matchedentry[-161:])
-b.solve()
+b = Board(matchedentry[-161:], animation = False)
+b.solve(printt = True)
 
 # print("-----------")
 out = ""
