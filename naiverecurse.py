@@ -157,8 +157,14 @@ for entry in allin:
     if id in entry:
         matchedentry = entry
 
-b = Board(matchedentry[-161:], animation = False)
-b.solve(printt = True)
+b = Board(matchedentry[-161:], animation = False, delay = .1)
+
+start_time = time.time()
+
+b.solve(printt = False)
+
+print(b.steps)
+print("--- %s seconds ---" % (time.time() - start_time))
 
 # print("-----------")
 out = ""

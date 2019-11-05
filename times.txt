@@ -1,0 +1,3 @@
+A1-1, 303 iterations, 0.010782241821289062 seconds
+A2-1, 27974 iterations, 0.6522274017333984 seconds
+A3-1, 10674 iteration, 0.25386667251586914 seconds
