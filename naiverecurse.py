@@ -140,28 +140,42 @@ class Board(object):
 
 
 
-filein = sys.argv[1]
-fileout = sys.argv[2]
-id = sys.argv[3]
+# filein = sys.argv[1]
+# fileout = sys.argv[2]
+# id = sys.argv[3]
+#
+# f = open(filein, "r")
+#
+# allin = f.read()
+#
+# allin = allin.split("\n\n")
+#
+#
+# matchedentry = ""
+#
+# for entry in allin:
+#     if id in entry:
+#         matchedentry = entry
 
-f = open(filein, "r")
 
-allin = f.read()
+expert = """_,_,_,_,7,_,9,4,_
+_,7,_,_,9,_,_,_,5
+3,_,_,_,_,5,_,7,_
+_,8,7,4,_,_,1,_,_
+4,6,3,_,_,_,_,_,_
+_,_,_,_,_,7,_,8,_
+8,_,_,7,_,_,_,_,_
+7,_,_,_,_,_,_,2,8
+_,5,_,2,6,8,_,_,_"""
 
-allin = allin.split("\n\n")
 
+# b = Board(matchedentry[-161:], animation = False, delay = .1)
 
-matchedentry = ""
-
-for entry in allin:
-    if id in entry:
-        matchedentry = entry
-
-b = Board(matchedentry[-161:], animation = False, delay = .1)
+b = Board(expert, animation = True, delay = .5)
 
 start_time = time.time()
 
-b.solve(printt = False)
+b.solve(printt = True)
 
 print(b.steps)
 print("--- %s seconds ---" % (time.time() - start_time))
@@ -174,9 +188,9 @@ for x in b.allnodes:
     if (x.id+1)%9 == 0:
         out = out.strip(",")
         out = out + "\n"
-
-out.strip("\n")
-
-f = open(fileout, "w")
-f.write(out)
-f.close()
+#
+# out.strip("\n")
+#
+# f = open(fileout, "w")
+# f.write(out)
+# f.close()
